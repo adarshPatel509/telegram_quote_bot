@@ -1,5 +1,6 @@
 import urllib
 from lyrcis import get_lyrics
+from hindi_quotes import get_hindi_quotes
 
 def get_response_message(text):
     query = text.split(" ")
@@ -28,9 +29,6 @@ def get_response_message(text):
 
     return options.get(command, "Invalid Command!\n{}".format(help_text))
 
-
-def get_hindi_quotes(keywords):
-    return keywords
 
 def get_english_quotes(keywords):
     return keywords
