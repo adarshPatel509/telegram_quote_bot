@@ -1,4 +1,5 @@
 import json, requests
+from response import get_response_message
 
 #read constants from config file
 with open("./config.json") as config_file:
@@ -24,7 +25,10 @@ def get_message_updates(offset=None):
     return res
 
 def send_text_reply(message, chat_id):
-    url = URL + "sendMessage?text={}&chat_id={}".format(message, chat_id)
+    #fetch response form 3rd party apis
+    res_message = get_response_message(message)
+    url = URL + "sendMessage?text={}&chat_id={}".format(res_message, chat_id)
+    #send response to user
     get_response_from_url(url)
 
 def reply_all_unresolved_updates(updates):
