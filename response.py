@@ -1,12 +1,13 @@
 import urllib
 from lyrcis import get_lyrics
 from hindi_quotes import get_hindi_quotes
+from english_quotes import get_english_quotes
 
 def get_response_message(text):
     query = text.split(" ")
     command = query[0]
     avail_commands = ["/lyrics", "/q_hindi", "/q_english", "/help", "/start"]
-    help_text = "Enter a command you want to search for:\n eg: \n /q_hindi zindagi \n /q_english love \n /lyrics You & I"
+    help_text = urllib.parse.quote_plus("Enter a command you want to search for:\n eg: \n /q_hindi zindagi \n /q_english love \n /lyrics You & I")
     message = ""
 
     if len(query) > 1 and command in avail_commands:
@@ -28,7 +29,3 @@ def get_response_message(text):
     }
 
     return options.get(command, "Invalid Command!\n{}".format(help_text))
-
-
-def get_english_quotes(keywords):
-    return keywords

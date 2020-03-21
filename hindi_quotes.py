@@ -8,20 +8,20 @@ def get_hindi_quotes(text):
     try:
         content = urllib.request.urlopen(query_url).read()
         soup = BeautifulSoup(content, "html.parser")
-        result = soup.select("div[class='post-entry']")
+        results = soup.select("div[class='post-entry']")
 
-        if len(result) == 0:
+        if len(results) == 0:
             return "No results found :(\nSearch for something else :)"
 
         response = ""
         count = 0
 
-        for res in result:
-            response += res.getText()
+        for result in results:
+            response += result.getText()
             count += 1
             if count == 5:
                 break
-            response += "\n.......\n"
+            response += "\n........\n"
         
         response = urllib.parse.quote_plus(response)
         return response
