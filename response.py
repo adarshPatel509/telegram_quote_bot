@@ -20,12 +20,14 @@ def get_response_message(text):
         message = "Invalid Command!\n{}".format(help_text)
         return message
     
-    options = {
-        "/lyrics": get_lyrics(message),
-        "/q_hindi": get_hindi_quotes(message),
-        "/q_english": get_english_quotes(message),
-        "/help": help_text,
-        "/start": help_text
-    }
-
-    return options.get(command, "Invalid Command!\n{}".format(help_text))
+    #do command specific action
+    if command == "/lyrics":
+        return get_lyrics(message)
+    elif command == "/q_hindi":
+        return get_hindi_quotes(message)
+    elif command == "/q_english":
+        return get_english_quotes(message)
+    elif command == "/help" or command == "/start":
+        return help_text
+    else:
+        return "Invalid Command!\n{}".format(help_text)

@@ -2,6 +2,7 @@ import urllib, requests
 from bs4 import BeautifulSoup
 
 def get_english_quotes(text):
+    print("fetching_q_english....")
     text = text.strip().replace(" ", "+")
     query_url = "https://www.brainyquote.com/search_results?q={}".format(text)
 

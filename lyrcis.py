@@ -1,16 +1,17 @@
 import re
-import urllib
+import urllib, requests
 from bs4 import BeautifulSoup
 
 def get_song_url(song_title):
+    print("fetching_lyrics....")
     song_title = song_title.strip()
     song_title = song_title.replace(" ", "+")
     query_url = "https://search.azlyrics.com/search.php?q={}".format(song_title)
 
     try:
         #fetch song url from song_title
-        content = urllib.request.urlopen(query_url).read()
-        soup = BeautifulSoup(content, "html.parser")
+        html = requests.get(query_url)
+        soup = BeautifulSoup(html.text, "html.parser")
         result = soup.select('div[class="panel"]')
         result = result[len(result) -1]
         
@@ -28,8 +29,8 @@ def get_lyrics(song_title):
         return "Error Occurred!"
 
     try:
-        content = urllib.request.urlopen(lyrics_url).read()
-        soup = BeautifulSoup(content, 'html.parser')
+        html = requests.get(lyrics_url)
+        soup = BeautifulSoup(html.text, 'html.parser')
         lyrics = str(soup)
 
         # lyrics lies between up_partition and down_partition

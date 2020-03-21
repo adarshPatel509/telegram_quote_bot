@@ -1,13 +1,14 @@
-import urllib
+import urllib, requests
 from bs4 import BeautifulSoup
 
 def get_hindi_quotes(text):
+    print("fetching_q_hindi....")
     text = text.strip().replace(" ", "+")
     query_url = "https://www.shayarism.com/?s={}".format(text)
     
     try:
-        content = urllib.request.urlopen(query_url).read()
-        soup = BeautifulSoup(content, "html.parser")
+        html = requests.get(query_url)
+        soup = BeautifulSoup(html.text, "html.parser")
         results = soup.select("div[class='post-entry']")
 
         if len(results) == 0:
